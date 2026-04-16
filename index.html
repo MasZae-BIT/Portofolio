@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Zae Labs | Irsya Zaelani</title>
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <style>
         /* =========================================
@@ -76,11 +76,11 @@
            ========================================= */
         #zae-landing {
             width: 100%;
-            height: 100vh;
+            height: 100vh; /* Mengambil layar penuh */
             background-color: #000;
             display: flex;
             flex-direction: column;
-            position: relative;
+            position: relative; /* Dibuat relative agar bisa discroll secara natural */
             z-index: 2;
         }
 
@@ -387,7 +387,7 @@
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             transform-style: preserve-3d; 
             display: flex; flex-direction: column;
-            position: relative; /* Penting untuk accordion */
+            position: relative;
         }
         .card:hover {
             border-color: rgba(255, 255, 255, 0.3);
@@ -446,15 +446,15 @@
             flex-direction: column;
             gap: 5px;
             overflow: hidden;
-            max-height: 0; /* Tertutup secara default */
+            max-height: 0; 
             opacity: 0;
             transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
         }
         
         .cert-dropdown.active {
-            max-height: 300px; /* Cukup besar untuk menampilkan opsi */
+            max-height: 300px; 
             opacity: 1;
-            margin-top: 15px; /* Memberi jarak saat terbuka */
+            margin-top: 15px; 
         }
         
         .cert-dropdown a {
@@ -633,6 +633,8 @@
             margin-bottom: 50px;
             flex-wrap: wrap;
         }
+        
+        /* Tombol Link Bulat (Diubah jadi tag <a>) */
         .circle-btn {
             width: 42px; 
             height: 42px;
@@ -640,17 +642,20 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             background: transparent;
             color: #fff;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             font-size: 1rem;
             transition: 0.3s ease;
             cursor: pointer;
+            text-decoration: none;
         }
         .circle-btn:hover {
             background: rgba(255, 255, 255, 0.1);
             border-color: rgba(255, 255, 255, 0.6);
         }
+        
+        /* Tombol Newsletter Link (Diubah jadi tag <a>) */
         .btn-solid-pill {
             background: #fff;
             color: #000;
@@ -662,6 +667,10 @@
             font-weight: 600;
             transition: 0.3s ease;
             cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
         .btn-solid-pill:hover {
             background: #e0e0e0;
@@ -733,7 +742,6 @@
             
             .profile-photo { width: 80%; max-width: 280px; }
 
-            /* Menghilangkan hover paksa di mobile agar accordion stabil */
             .card, .tool-card { width: 100%; transform: none !important; perspective: none !important; transition: transform 0.3s ease !important; }
             .card:hover, .tool-card:hover { transform: translateY(0px) !important; }
 
@@ -838,7 +846,7 @@
         <section id="experience" class="hidden">
             <h2>My <span style="font-weight: 300;">Experience</span></h2>
             <div class="projects-grid">
-
+                
                 <div class="card">
                     <h3>LPK Tepi Sawah Volunteer</h3>
                     <p class="date-loc">IPB University | Present</p>
@@ -870,7 +878,7 @@
             <h2>My <span style="font-weight: 300;">Certifications</span></h2>
             <div class="projects-grid">
                 
-                <div class="card">
+                  <div class="card">
                     <i class="fa-brands fa-google cert-icon"></i>
                     <h3>Google Certification</h3>
                     <p>Official certifications from Google demonstrating industry-standard technical competence and expertise.</p>
@@ -985,30 +993,27 @@
         </section>
 
         <section id="access-section" class="hidden">
-            <div class="access-top-links">
-                <a href="#">labs.zae</a>
-                <a href="#">Instagram</a>
-            </div>
             
-            <h2 class="access-title">Access</h2>
+            <h2 class="access-title">Access Now</h2>
             
             <div class="access-buttons">
-                <a href="#" class="btn-outline-wide">Explore Zae AI Ultra</a>
-                <a href="#" class="btn-outline-wide">Learn more about Zae</a>
+                <a href="https://maszae-bit.github.io/ZaeAI/" class="btn-outline-wide">Explore Zae AI</a>
+                <a href="https://portofolio-iota-one-64.vercel.app/" class="btn-outline-wide">Zae Vision</a>
             </div>
             
             <a href="#" class="access-bottom-link">Already have access? Go to Project Zae</a>
-        </section>
+        </section> 
 
         <footer class="zae-footer">
             <div class="footer-inner">
                 <div class="footer-top">
                     <p class="footer-tagline">Stay connected for early access to our newest tools and local events</p>
                     <div class="newsletter-row">
-                        <button class="circle-btn"><i class="fa-solid fa-circle" style="font-size: 8px;"></i></button>
-                        <button class="circle-btn"><i class="fa-solid fa-won-sign"></i></button>
-                        <button class="circle-btn"><i class="fa-brands fa-x-twitter"></i></button>
-                        <button class="btn-solid-pill">Sign up for our newsletter</button>
+                        <a href="https://www.instagram.com/irsyazaelani/" class="circle-btn"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="www.linkedin.com/in/muhammad-irsya-zaelani" class="circle-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://x.com/TweetsOfCats/status/1578127628179210240" class="circle-btn"><i class="fa-brands fa-x-twitter"></i></a>
+                        
+                        <a href="https://maszae-bit.github.io/Login-Zae-Group/" class="btn-solid-pill">Sign up for our newsletter</a>
                     </div>
                 </div>
                 
@@ -1016,20 +1021,20 @@
                     <div class="footer-col">
                         <h4>NAVIGATION</h4>
                         <ul>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Experiments</a></li>
-                            <li><a href="#">Sessions</a></li>
-                            <li><a href="#">Community</a></li>
+                            <li><a href="https://portofolio-iota-one-64.vercel.app/">About</a></li>
+                            <li><a href="https://portofolio-iota-one-64.vercel.app/">Experiments</a></li>
+                            <li><a href="https://portofolio-iota-one-64.vercel.app/">Sessions</a></li>
+                            <li><a href="https://portofolio-iota-one-64.vercel.app/">Community</a></li>
                         </ul>
                     </div>
                     <div class="footer-col">
                         <h4>OTHER TEAMS AND PRODUCT AREAS</h4>
                         <ul>
-                            <li><a href="#">Zae AI</a></li>
-                            <li><a href="#">Zae Cloud</a></li>
-                            <li><a href="#">Zae Research</a></li>
-                            <li><a href="#">Zae DeepMind</a></li>
-                            <li><a href="#">Search Labs</a></li>
+                            <li><a href="https://maszae-bit.github.io/ZaeAI/">Zae AI</a></li>
+                            <li><a href="https://portofolio-iota-one-64.vercel.app/">Zae Cloud</a></li>
+                            <li><a href="https://portofolio-iota-one-64.vercel.app/">Zae Research</a></li>
+                            <li><a href="https://portofolio-iota-one-64.vercel.app/">Zae DeepMind</a></li>
+                            <li><a href="https://portofolio-iota-one-64.vercel.app/">Search Labs</a></li>
                         </ul>
                     </div>
                 </div>
