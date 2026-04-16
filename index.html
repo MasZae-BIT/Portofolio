@@ -2,74 +2,254 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web3 Portfolio | Irsya Zaelani</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Zae Labs | Irsya Zaelani</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         /* =========================================
-           BASE SETTINGS & MAIN THEME
+           BASE SETTINGS & PREMIUM MINIMALIST THEME
            ========================================= */
+        :root {
+            --bg-color: #000000;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --accent: #ffffff;
+            --border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            scroll-behavior: smooth; 
-            cursor: none; 
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: #0d0d0d;
-            color: #ffffff;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-y: hidden; /* Kunci scroll di awal */
             overflow-x: hidden;
-            background-image: 
-                linear-gradient(rgba(0, 255, 204, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 204, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
+            width: 100%;
         }
 
         /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0d0d0d; }
-        ::-webkit-scrollbar-thumb { background: rgba(0, 255, 204, 0.3); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 255, 204, 0.6); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.6); }
 
-        /* Custom Cursor Styling */
-        .cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #00ffcc; 
+        /* Custom Cursor Styling (Hanya untuk Desktop) */
+        @media (pointer: fine) {
+            * { cursor: none; }
+            .cursor {
+                width: 18px;
+                height: 18px;
+                border: 2px solid var(--accent); 
+                border-radius: 50%;
+                position: fixed; 
+                pointer-events: none !important; 
+                z-index: 9999999; 
+                transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.2s;
+                transform: translate(-50%, -50%);
+                mix-blend-mode: difference;
+            }
+            .cursor.active {
+                transform: translate(-50%, -50%) scale(2.2);
+                background: rgba(255, 255, 255, 0.9);
+                border-color: transparent;
+                mix-blend-mode: normal;
+            }
+        }
+        @media (pointer: coarse) {
+            .cursor { display: none !important; }
+            * { cursor: auto !important; }
+        }
+
+        /* =========================================
+           LANDING PAGE (PROJECT ZAE SCREENSHOT)
+           ========================================= */
+        #zae-landing {
+            width: 100%;
+            height: 100vh; /* Mengambil layar penuh */
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            position: relative; /* Dibuat relative agar bisa discroll secara natural */
+            z-index: 2;
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .landing-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 35px;
+            width: 100%;
+        }
+
+        .landing-nav .logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .landing-nav .icons {
+            display: flex;
+            gap: 20px;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        .landing-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .landing-main h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+        }
+
+        .landing-main .subtitle {
+            color: var(--text-muted);
+            font-size: clamp(0.9rem, 3vw, 1.15rem);
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .image-showcase {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 50px;
+            width: 100%;
+            max-width: 500px;
+            height: 250px;
+        }
+
+        .showcase-circle {
             border-radius: 50%;
-            position: fixed; 
+            object-fit: cover;
+            position: absolute;
             pointer-events: none;
-            z-index: 9999;
-            box-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
-            transition: transform 0.15s ease, background 0.1s;
-            transform: translate(-50%, -50%);
-            mix-blend-mode: difference;
-        }
-        .cursor.active {
-            transform: translate(-50%, -50%) scale(2.5);
-            background: rgba(0, 255, 204, 1);
-            border-color: transparent;
-            mix-blend-mode: normal;
-        }
-        @media (hover: none) {
-            .cursor { display: none; }
-            * { cursor: auto; }
         }
 
-        /* Sparkling Background Animation */
-        .glow-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: radial-gradient(circle at 50% 50%, rgba(0, 255, 204, 0.05), transparent 60%);
-            z-index: -1;
+        .circle-left {
+            width: 140px; height: 140px;
+            left: 5%;
+            z-index: 1;
+            filter: brightness(0.5);
+            animation: floatSide 6s ease-in-out infinite 0.5s;
+        }
+
+        .circle-center {
+            width: 240px; height: 240px;
+            z-index: 3;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.9);
+            animation: floatCenter 5s ease-in-out infinite;
+        }
+
+        .circle-right {
+            width: 140px; height: 140px;
+            right: 5%;
+            z-index: 1;
+            filter: brightness(0.5);
+            animation: floatSide 7s ease-in-out infinite 1s;
+        }
+
+        @keyframes floatCenter {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 50px rgba(255,255,255,0.08); }
+        }
+        @keyframes floatSide {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        #explore-btn {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 15px 50px;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 10;
+            cursor: pointer !important; 
+        }
+
+        #explore-btn:hover {
+            background: #fff;
+            color: #000;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            border-color: #fff;
+        }
+
+        .access-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            margin-bottom: 40px;
+            transition: color 0.3s;
+            position: relative;
+            z-index: 10;
+        }
+
+        .access-link:hover { color: #fff; }
+
+        .landing-footer {
+            text-align: center;
+            color: #555;
+            font-size: 0.85rem;
+            padding-bottom: 35px;
+            width: 100%;
+        }
+
+        .landing-footer span { color: #aaa; font-weight: 500; }
+
+        /* =========================================
+           PORTFOLIO CONTENT 
+           ========================================= */
+        #main-portfolio {
+            width: 100%;
+            position: relative;
+            background-color: var(--bg-color);
+            z-index: 1;
         }
 
         /* Navigation */
@@ -78,56 +258,52 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 50px;
-            background: rgba(13, 13, 13, 0.95);
-            position: fixed;
-            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            position: sticky; 
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(0, 255, 204, 0.1);
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
         }
         nav h1 {
-            color: #00ffcc;
-            text-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
-            font-size: 1.8rem;
-            animation: navGlowPulse 2s infinite alternate;
-        }
-        @keyframes navGlowPulse {
-            0% { text-shadow: 0 0 5px rgba(0, 255, 204, 0.5); }
-            100% { text-shadow: 0 0 15px rgba(0, 255, 204, 1); }
+            color: var(--text-main);
+            font-size: 1.4rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.5px;
         }
         
         /* Hamburger Menu Icon */
         .menu-toggle {
             display: none;
-            font-size: 1.8rem;
-            color: #00ffcc;
+            font-size: 1.5rem;
+            color: var(--text-main);
             transition: transform 0.3s ease;
             z-index: 1001;
+            cursor: pointer;
         }
         
         nav ul {
             list-style: none;
             display: flex;
-            gap: 20px;
+            gap: 35px;
         }
         nav ul li a {
-            color: #fff;
+            color: var(--text-muted);
             text-decoration: none;
-            transition: color 0.3s, text-shadow 0.3s;
+            transition: color 0.3s;
             font-weight: 500;
-            position: relative;
+            font-size: 0.95rem;
         }
-        nav ul li a:hover {
-            color: #00ffcc;
-            text-shadow: 0 0 5px rgba(0, 255, 204, 0.7);
-        }
+        nav ul li a:hover { color: var(--text-main); }
 
         /* General Section */
         section {
             min-height: 100vh;
-            padding: 120px 50px 50px 50px;
+            padding: 130px 50px 50px 50px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -145,12 +321,9 @@
             justify-content: space-between;
             text-align: left;
             gap: 50px;
-            opacity: 0;
-            animation: hero3DEntrance 1.5s ease-out forwards;
-        }
-        @keyframes hero3DEntrance {
-            0% { opacity: 0; transform: rotateY(-30deg) translateY(50px); }
-            100% { opacity: 1; transform: rotateY(0deg) translateY(0); }
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .hero-text {
@@ -161,68 +334,46 @@
         }
 
         .hero h2 { 
-            font-size: 3.5rem; 
+            font-size: clamp(2.5rem, 5vw, 4rem); 
             margin-bottom: 10px; 
-            line-height: 1.2;
-            position: relative;
-        }
-        .hero h2 span { 
-            color: #00ffcc;
-            animation: textGlitch 5s infinite;
-        }
-        @keyframes textGlitch {
-            0%, 100% { transform: translate(0, 0); text-shadow: 0 0 10px rgba(0, 255, 204, 0.5); }
-            1% { transform: translate(2px, -1px); text-shadow: 2px 0 red, -1px 0 blue; }
-            2% { transform: translate(-1px, 2px); text-shadow: -1px 0 red, 1px 0 blue; }
-            3% { transform: translate(1px, 1px); text-shadow: 1px 0 red, -1px 0 blue; }
-            4% { transform: translate(0, 0); text-shadow: 0 0 10px rgba(0, 255, 204, 0.5); }
+            line-height: 1.1;
+            letter-spacing: -1px;
+            color: #fff;
         }
         
-        .hero h3 { font-size: 1.5rem; color: #ccc; margin-bottom: 20px; font-weight: 400; }
-        .hero h3 span {
-            color: #fff; font-weight: 600; border-bottom: 2px solid rgba(0, 255, 204, 0.3);
-            animation: h3BorderGlow 1s infinite alternate;
-        }
-        @keyframes h3BorderGlow {
-            0% { border-bottom-color: rgba(0, 255, 204, 0.1); }
-            100% { border-bottom-color: rgba(0, 255, 204, 0.8); }
-        }
+        .hero h3 { font-size: clamp(1.1rem, 2vw, 1.4rem); color: var(--text-muted); margin-bottom: 25px; font-weight: 400; }
+        .hero h3 span { color: #fff; font-weight: 600; }
 
-        #typing-text { font-size: 1.1rem; max-width: 600px; line-height: 1.8; color: #bbb; margin-bottom: 30px;}
+        #typing-text { font-size: 1.15rem; max-width: 600px; line-height: 1.8; color: #a0a0a0; margin-bottom: 40px; min-height: 80px;}
 
         .hero-image-wrapper { flex: 1; display: flex; justify-content: center; align-items: center; position: relative;}
 
+        /* FOTO PROFIL PERSEGI MODERN */
         .profile-photo {
-            max-width: 400px; width: 100%; height: auto; object-fit: contain;
-            border-radius: 40px; animation: floatPhoto 4s ease-in-out infinite, glitchPhoto 6s infinite;
-            filter: none;
+            max-width: 380px; width: 100%; height: auto; 
+            aspect-ratio: 1/1; 
+            object-fit: cover; 
+            border-radius: 16px; 
+            border: 1px solid rgba(255,255,255,0.1);
+            animation: floatPhoto 8s ease-in-out infinite;
+            box-shadow: 0 20px 50px rgba(255,255,255,0.05);
         }
 
         @keyframes floatPhoto {
-            0% { transform: translateY(0px) rotateX(0deg); }
-            50% { transform: translateY(-20px) rotateX(5deg); }
-            100% { transform: translateY(0px) rotateX(0deg); }
-        }
-        @keyframes glitchPhoto {
-            0%, 100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); opacity: 1; }
-            1% { clip-path: polygon(0 15%, 100% 15%, 100% 16%, 0 16%); transform: translateX(5px); opacity: 0.8; }
-            2% { clip-path: polygon(0 85%, 100% 85%, 100% 86%, 0 86%); transform: translateX(-5px); opacity: 0.8; }
-            3% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: translateX(0); opacity: 1; }
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
         }
 
         .scroll-down {
-            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-            color: rgba(0,255,204,0.3); font-size: 1.5rem;
-            animation: bounceArrow 2s infinite, scrollDownGlow 1s infinite alternate;
+            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+            color: rgba(255,255,255,0.4); font-size: 1.5rem;
+            animation: bounceArrow 2.5s infinite cubic-bezier(0.445, 0.05, 0.55, 0.95);
         }
         @keyframes bounceArrow {
             0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
-            40% {transform: translateY(-10px) translateX(-50%);}
-            60% {transform: translateY(-5px) translateX(-50%);}
-        }
-        @keyframes scrollDownGlow {
-            0% { color: rgba(0,255,204,0.2); text-shadow: 0 0 0 rgba(0,255,204,0); }
-            100% { color: rgba(0,255,204,0.7); text-shadow: 0 0 5px rgba(0,255,204,0.5); }
+            40% {transform: translateY(-12px) translateX(-50%);}
+            60% {transform: translateY(-6px) translateX(-50%);}
         }
 
         /* =========================================
@@ -230,360 +381,606 @@
            ========================================= */
         .projects-grid {
             display: flex; gap: 30px; margin-top: 50px; flex-wrap: wrap; justify-content: center;
-            perspective: 1000px;
+            perspective: 1000px; width: 100%; max-width: 1200px;
         }
         .card {
-            background: rgba(26, 26, 26, 0.7); padding: 30px; border-radius: 10px; width: 320px;
-            border: 1px solid rgba(51, 51, 51, 0.5); text-align: left; backdrop-filter: blur(5px);
-            transition: transform 0.1s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            transform-style: preserve-3d; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            background: rgba(15, 15, 15, 0.6); padding: 40px 35px; border-radius: 24px; width: 100%; max-width: 340px;
+            border: 1px solid var(--border-color); text-align: left; 
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform-style: preserve-3d; 
             display: flex; flex-direction: column;
         }
         .card:hover {
-            border-color: rgba(0, 255, 204, 0.5);
-            box-shadow: 0 15px 30px rgba(0, 255, 204, 0.2), 0 0 10px rgba(0, 255, 204, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(25, 25, 25, 0.8);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.04);
+            transform: translateY(-8px);
         }
         .cert-icon {
-            font-size: 3rem; color: rgba(255, 255, 255, 0.8); margin-bottom: 20px; display: block;
-            text-shadow: 0 0 15px rgba(0, 255, 204, 0.5); transform: translateZ(35px);
+            font-size: 2.8rem; color: #fff; margin-bottom: 25px; display: block;
+            transform: translateZ(35px);
         }
         .card h3 { 
-            color: #00ffcc; margin-bottom: 5px; font-size: 1.3rem; 
-            text-shadow: 0 0 5px rgba(0, 255, 204, 0.5); transform: translateZ(30px); 
+            color: #fff; margin-bottom: 10px; font-size: 1.4rem; letter-spacing: -0.5px;
+            transform: translateZ(30px); 
         }
         .card .date-loc {
-            color: rgba(0, 255, 204, 0.7); font-size: 0.85rem; font-weight: 500; margin-bottom: 15px; transform: translateZ(25px);
+            color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px; font-weight: 500; transform: translateZ(25px);
         }
-        .card p { color: #bbb; line-height: 1.5; transform: translateZ(15px); flex-grow: 1; }
+        .card p { color: #999; line-height: 1.7; transform: translateZ(15px); flex-grow: 1; font-size: 0.95rem; }
 
-        .hidden { opacity: 0; transform: translateY(50px); transition: all 1s ease-out; }
-        .show { opacity: 1; transform: translateY(0); }
+        .hidden { opacity: 0; transform: translateY(40px) scale(0.95); transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .show { opacity: 1; transform: translateY(0) scale(1); }
 
         /* =========================================
            TOOLS COLLECTION 
            ========================================= */
-        .tools-header { text-align: center; width: 100%; max-width: 600px; margin-bottom: 50px; position: relative; z-index: 2; }
-        .tools-header h2 { font-size: 2.5rem; margin-bottom: 10px; text-shadow: 0 0 5px rgba(0, 255, 204, 0.5);}
-        .tools-header p { color: rgba(255, 255, 255, 0.6); margin-bottom: 30px; font-size: 0.9rem; }
+        .tools-header { text-align: center; width: 100%; max-width: 600px; margin-bottom: 60px; position: relative; z-index: 2; }
+        .tools-header h2 { font-size: 2.8rem; margin-bottom: 15px; letter-spacing: -1px;}
+        .tools-header p { color: var(--text-muted); margin-bottom: 35px; font-size: 1rem; }
         .search-wrapper { position: relative; width: 100%; }
         .search-input {
-            width: 100%; padding: 15px 20px 15px 55px; border-radius: 50px; 
-            border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(255, 255, 255, 0.03);
-            color: white; font-size: 1rem; outline: none; backdrop-filter: blur(10px);
-            transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%; padding: 18px 25px 18px 60px; border-radius: 40px; 
+            border: 1px solid var(--border-color); background: rgba(20, 20, 20, 0.5);
+            color: white; font-size: 1rem; outline: none; backdrop-filter: blur(15px);
+            transition: all 0.3s ease;
         }
-        .search-input::placeholder { color: rgba(255,255,255,0.3); }
+        .search-input::placeholder { color: #666; }
         .search-input:focus {
-            background: rgba(255, 255, 255, 0.05); border-color: rgba(0, 255, 204, 0.4); 
-            box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+            background: rgba(30, 30, 30, 0.8); border-color: rgba(255, 255, 255, 0.4); 
+            box-shadow: 0 0 20px rgba(255,255,255,0.05);
         }
-        .search-icon { position: absolute; left: 25px; top: 50%; transform: translateY(-50%); color: rgba(0, 255, 204, 0.4); pointer-events: none; }
+        .search-icon { position: absolute; left: 25px; top: 50%; transform: translateY(-50%); color: #666; font-size: 1.2rem; pointer-events: none; }
 
         .tools-grid-container {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 25px; width: 100%; max-width: 1000px; padding-bottom: 40px; perspective: 1000px; 
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 20px; width: 100%; max-width: 1000px; padding-bottom: 40px; perspective: 1000px; 
         }
 
         .tool-card {
-            position: relative; background: rgba(26, 26, 26, 0.5); border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.05); border-top: 1px solid rgba(255, 255, 255, 0.1); border-left: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            height: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-decoration: none; overflow: hidden; transition: transform 0.1s ease, box-shadow 0.3s ease, border-color 0.3s ease; transform-style: preserve-3d;
+            position: relative; background: rgba(15, 15, 15, 0.6); border-radius: 20px;
+            border: 1px solid var(--border-color); backdrop-filter: blur(10px);
+            height: 160px; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-decoration: none; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); transform-style: preserve-3d;
         }
-        .tool-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 255, 204, 0.05) 0%, transparent 100%);
-            opacity: 0; transition: opacity 0.3s;
-        }
-        .tool-card:hover::before { opacity: 1; }
         .tool-card i { 
-            font-size: 3.5rem; margin-bottom: 20px; color: rgba(255, 255, 255, 0.7); 
-            text-shadow: 0 5px 15px rgba(0,0,0,0.3); transform: translateZ(30px); 
-            animation: floatIconDynamic infinite alternate ease-in-out;
+            font-size: 3rem; margin-bottom: 15px; color: #fff; 
+            transform: translateZ(30px); transition: all 0.4s ease;
         }
-        @keyframes floatIconDynamic {
-            0% { transform: translateY(0px) translateZ(30px) rotate(0deg); }
-            100% { transform: translateY(-10px) translateZ(35px) rotate(5deg); }
-        }
-        .tool-card:nth-child(even) i { animation-duration: 4.5s; }
-        .tool-card:nth-child(odd) i { animation-duration: 3.5s; animation-delay: 1s;}
-
         .tool-card span {
-            color: #ddd; font-size: 0.95rem; font-weight: 500; letter-spacing: 0.5px; text-align: center; padding: 0 10px; z-index: 1; transform: translateZ(15px);
+            color: #ccc; font-size: 0.95rem; font-weight: 500; text-align: center; padding: 0 10px; transform: translateZ(15px);
         }
         .tool-card:hover {
-            border-color: rgba(0, 255, 204, 0.4);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 20px rgba(0, 255, 204, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(30, 30, 30, 0.8);
+            transform: translateY(-6px);
+            box-shadow: 0 15px 30px rgba(255,255,255,0.03);
         }
-        .tool-card:hover i {
-            animation-play-state: paused; color: #00ffcc;
-            transform: scale(1.1) rotate(5deg) translateZ(40px); text-shadow: 0 0 20px rgba(0, 255, 204, 0.8);
+        .tool-card:hover i { transform: scale(1.15) translateZ(40px); }
+        #no-result { display: none; grid-column: 1 / -1; text-align: center; color: var(--text-muted); margin-top: 20px; font-style: italic;}
+
+        /* BUTTON SOCIAL STYLE (Masih digunakan di Hero) */
+        .btn-social {
+            display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; 
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.2); color: #fff; 
+            text-decoration: none; border-radius: 40px; font-size: 0.95rem; font-weight: 500; 
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); backdrop-filter: blur(5px);
         }
-        #no-result { display: none; grid-column: 1 / -1; text-align: center; color: rgba(255, 255, 255, 0.4); margin-top: 20px; font-style: italic;}
+        .btn-social:hover { 
+            background: #fff; color: #000; transform: translateY(-4px); 
+            box-shadow: 0 10px 20px rgba(255,255,255,0.1); border-color: #fff;
+        }
 
         /* =========================================
-           SOCIAL MEDIA BUTTONS & CALL TO ACTION
+           ACCESS SECTION (REFINED & SMALLER SIZES)
            ========================================= */
-        .social-wrapper { display: flex; gap: 20px; margin-top: 10px; justify-content: center; flex-wrap: wrap; }
-        .btn-social {
-            display: inline-flex; align-items: center; gap: 10px; padding: 12px 25px; background: transparent; border: 2px solid rgba(0, 255, 204, 0.5); color: #00ffcc; text-decoration: none; border-radius: 50px; font-size: 1rem; font-weight: 600; 
-            transition: all 0.3s ease; position: relative; overflow: hidden; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+        #access-section {
+            min-height: auto;
+            padding: 80px 20px 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
-        .hero-text .btn-social { animation: btnPulseNeon 2s infinite alternate; }
-        @keyframes btnPulseNeon {
-            0% { box-shadow: 0 0 5px rgba(0, 255, 204, 0.2); border-color: rgba(0, 255, 204, 0.4); }
-            100% { box-shadow: 0 0 20px rgba(0, 255, 204, 0.6); border-color: rgba(0, 255, 204, 0.9); }
+        .access-top-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 25px;
         }
-        .btn-social:hover { background: #00ffcc; color: #0d0d0d; box-shadow: 0 0 30px rgba(0, 255, 204, 0.8); transform: translateY(-5px); text-shadow: none; }
+        .access-top-links a {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: color 0.3s;
+        }
+        .access-top-links a:hover { color: #fff; }
+        
+        .access-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 25px;
+            color: #fff;
+        }
+        
+        .access-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 320px; /* Lebar tombol diperkecil */
+            margin: 0 auto;
+        }
+        .btn-outline-wide {
+            display: block;
+            padding: 12px 20px; /* Padding lebih tipis */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Garis outline lebih tipis/redup */
+            border-radius: 40px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.85rem; /* Font lebih kecil proporsional */
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .btn-outline-wide:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: scale(1.02);
+        }
+        
+        .access-bottom-link {
+            color: #777;
+            text-decoration: none;
+            font-size: 0.8rem;
+            margin-top: 30px;
+            display: inline-block;
+            transition: color 0.3s;
+        }
+        .access-bottom-link:hover { color: #fff; }
+
+        /* =========================================
+           FOOTER SECTION (REFINED & SMALLER SIZES)
+           ========================================= */
+        .zae-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 50px 50px 80px; /* Padding disesuaikan */
+            background: #000;
+            text-align: left;
+            width: 100%;
+        }
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .footer-tagline {
+            font-size: 0.95rem; /* Teks lebih halus */
+            font-weight: 400;
+            line-height: 1.5;
+            max-width: 400px;
+            margin-bottom: 25px;
+            color: #eee;
+        }
+        .newsletter-row {
+            display: flex;
+            gap: 12px; /* Jarak antar tombol diperkecil */
+            align-items: center;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        .circle-btn {
+            width: 42px; /* Bulatan diperkecil */
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: 0.3s ease;
+            cursor: pointer;
+        }
+        .circle-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+        .btn-solid-pill {
+            background: #fff;
+            color: #000;
+            padding: 0 20px;
+            height: 42px; /* Disesuaikan tinggi bulatan */
+            border-radius: 30px;
+            border: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-solid-pill:hover {
+            background: #e0e0e0;
+            transform: scale(1.02);
+        }
+
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+        }
+        .footer-col h4 {
+            font-size: 0.7rem; /* Heading super mungil & sleek */
+            letter-spacing: 1.5px;
+            color: #666;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Jarak list dipersempit */
+        }
+        .footer-col ul li a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.85rem; /* Ukuran text minimalis */
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+        .footer-col ul li a:hover {
+            color: #fff;
+        }
 
         /* =========================================
            MEDIA QUERIES (MOBILE RESPONSIVE) 
            ========================================= */
         @media (max-width: 992px) {
-            .hero h2 { font-size: 2.8rem; }
-            .profile-photo { max-width: 300px; }
+            .circle-center { width: 200px; height: 200px; }
+            .circle-left, .circle-right { width: 120px; height: 120px; }
+            .hero { flex-direction: column-reverse; text-align: center; gap: 40px; padding-top: 80px; }
+            .hero-text { align-items: center; }
         }
 
         @media (max-width: 768px) {
             nav { padding: 15px 20px; flex-wrap: wrap; }
-            nav h1 { font-size: 1.5rem; }
+            nav h1 { font-size: 1.3rem; }
             
-            .menu-toggle { display: block; }
+            .menu-toggle { display: block; font-size: 1.4rem;}
             
             nav ul {
-                flex-direction: column; width: 100%; background: rgba(13, 13, 13, 0.98);
+                flex-direction: column; width: 100%; background: rgba(0, 0, 0, 0.98);
                 position: absolute; top: 100%; left: 0; gap: 0; overflow: hidden; max-height: 0; 
                 transition: max-height 0.4s ease-in-out; border-bottom: 1px solid transparent;
                 z-index: 99; backdrop-filter: blur(15px); 
             }
             
-            nav ul.active { max-height: 350px; border-bottom: 1px solid rgba(0, 255, 204, 0.3); padding-bottom: 10px; }
+            nav ul.active { max-height: 350px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }
             nav ul li { text-align: center; margin: 15px 0; }
             nav ul li a { display: block; font-size: 1.1rem; }
             
-            section { padding: 150px 20px 50px 20px; perspective: none; }
+            section { padding: 100px 20px 50px 20px; perspective: none; }
 
-            .hero { flex-direction: column-reverse; text-align: center; gap: 30px; padding-top: 130px; animation: heroEntranceHP 1s ease-out forwards; }
-            @keyframes heroEntranceHP { 0% { opacity: 0; transform: translateY(50px); } 100% { opacity: 1; transform: translateY(0); } }
-            .hero-text { align-items: center; }
             .hero h2 { font-size: 2.2rem; }
-            .hero h3 { font-size: 1.2rem; margin-bottom: 15px;}
+            .hero h3 { font-size: 1.1rem; margin-bottom: 15px;}
             #typing-text { font-size: 1rem; }
             
-            .profile-photo { width: 80%; max-width: 250px; animation: floatPhotoHP 4s ease-in-out infinite, glitchPhoto 6s infinite; }
-            @keyframes floatPhotoHP { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
+            .profile-photo { width: 80%; max-width: 280px; }
 
-            .card, .tool-card { width: 100%; max-width: 350px; transform: none !important; perspective: none !important; transition: transform 0.3s ease !important; }
-            .card:hover, .tool-card:hover { transform: translateY(-5px) !important; }
+            .card, .tool-card { width: 100%; transform: none !important; perspective: none !important; transition: transform 0.3s ease !important; }
+            .card:hover, .tool-card:hover { transform: translateY(-4px) !important; }
 
-            .tools-grid-container { grid-template-columns: repeat(2, 1fr); gap: 15px; perspective: none;}
-            .tool-card { height: 150px; }
-            .tool-card i { font-size: 2.5rem; margin-bottom: 15px; animation: none; transform: none !important;}
-            .tools-header h2 { font-size: 1.8rem; }
-            .search-input { font-size: 0.9rem; }
-            
-            .btn-social { width: 100%; justify-content: center; max-width: 250px; animation: none !important;}
+            .tools-grid-container { grid-template-columns: repeat(2, 1fr); gap: 12px; perspective: none;}
+            .tool-card { height: 130px; }
+            .tool-card i { font-size: 2rem; margin-bottom: 10px; transform: none !important;}
+            .tools-header h2 { font-size: 2rem; }
+            .search-input { font-size: 0.95rem; }
+
+            /* Landing Page Mobile Adjustments */
+            .landing-nav { padding: 20px; }
+            .image-showcase { height: 180px; margin-bottom: 30px; }
+            .circle-center { width: 160px; height: 160px; }
+            .circle-left, .circle-right { display: none; }
+
+            /* Mobile Footer */
+            .zae-footer { padding: 40px 20px 60px; }
+            .footer-columns { grid-template-columns: 1fr 1fr; gap: 20px; }
+        }
+        
+        @media (max-width: 480px) {
+            .newsletter-row { justify-content: center; }
+            .footer-tagline { text-align: center; }
         }
     </style>
 </head>
 <body>
 
     <div class="cursor" id="cursor"></div>
-    <div class="glow-bg"></div>
 
-    <nav>
-        <h1>< Portfolio /></h1>
-        
-        <div class="menu-toggle" id="mobile-menu">
-            <i class="fa-solid fa-bars"></i>
-        </div>
-
-        <ul id="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#certifications">Certifications</a></li>
-            <li><a href="#tools">Tools</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
-
-    <section id="home" class="hero">
-        <div class="hero-text">
-            <h2>Hello, I'm <span>Irsya Zaelani</span></h2>
-            <h3>Tech Enthusiast & Student at <span>IPB University</span></h3>
-            
-            <p id="typing-text"></p>
-            
-            <div class="social-wrapper" style="justify-content: flex-start;">
-                 <a href="#experience" class="btn-social">
-                    <i class="fa-solid fa-user-astronaut"></i> Get to Know Me
-                </a>
+    <div id="zae-landing">
+        <header class="landing-nav fade-in-up">
+            <div class="logo">
+                <i class="fa-solid fa-flask"></i> Zae Labs
             </div>
-        </div>
-
-        <div class="hero-image-wrapper">
-            <img src="https://instagram.fcgk15-1.fna.fbcdn.net/v/t51.82787-15/659592455_18112837321689596_351421020188487837_n.webp?_nc_cat=101&ig_cache_key=Mzg2Nzk3NTUwNzI4Mzk3NzY4MA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTkyMC5zZHIuQzMifQ%3D%3D&_nc_ohc=FnGz3z8YzbMQ7kNvwFdclAR&_nc_oc=AdplOnzmRcs3mRmRG2kIOqG-FTRp35_fbfn-gulBGAanmVl-KbSkS98Xl8mY_mLySZA&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fcgk15-1.fna&_nc_gid=KDWq1jFfoxUMr-MydoRVaQ&_nc_ss=7a32e&oh=00_Af1uGKnqjJirOyDDGjHb8L6N1CNwuqhG0FsZGgsbBFwXNw&oe=69D713B6" alt="Irsya Zaelani" class="profile-photo">
-        </div>
-
-        <a href="#experience" class="scroll-down">
-            <i class="fa-solid fa-angles-down"></i>
-        </a>
-    </section>
-
-    <section id="experience" class="hidden">
-        <h2>My <span style="color:#00ffcc;">Experience</span></h2>
-        <div class="projects-grid">
-            
-            <div class="card">
-                <h3>LPK Tepi Sawah Volunteer</h3>
-                <p class="date-loc">IPB University | Present</p>
-                <p>Actively volunteering in the Computer Science community, focusing on teaching basic things to children through play and participating in direct field activities.</p>
-            </div>
-
-            <div class="card">
-                <h3>Head of Robotic Club</h3>
-                <p class="date-loc">SMAN 28 Kab. Tangerang | Jun 2023 - Aug 2024</p>
-                <p>Led the high school robotics club and successfully engineered a Line Follower Robot. Fostered leadership, teamwork, and strong hardware-software integration skills.</p>
-            </div>
-            
-            <div class="card">
-                <h3>Member of Dastha Research Team</h3>
-                <p class="date-loc">SMAN 28 Kab. Tangerang | Jun 2023 - Jul 2024</p>
-                <p>Actively contributed to the research team. Applied strong analytical and teamwork skills to conduct studies, gather data, and develop innovative solutions.</p>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="certifications" class="hidden">
-        <h2>My <span style="color:#00ffcc;">Certifications</span></h2>
-        <div class="projects-grid">
-            
-            <div class="card">
-                <i class="fa-brands fa-google cert-icon"></i>
-                <h3>Google Certification</h3>
-                <p>An official certification from Google demonstrating industry-standard technical competence and expertise.</p>
-                
-                <div style="margin-top: 25px; transform: translateZ(20px);">
-                    <a href="https://edu.google.accredible.com/5463895f-480a-4157-96ab-885dcaeda295#acc.k3KbATth" target="_blank" class="btn-social">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View Certificate
-                    </a>
-                </div>
-            </div>
-            
-            <div class="card">
-                <i class="fa-solid fa-award cert-icon"></i>
-                <h3>IBM Certification</h3>
-                <p>An official certification from IBM validating advanced technical skills, data analysis, and problem-solving abilities.</p>
-                
-                <div style="margin-top: 25px; transform: translateZ(20px);">
-                    <a href="https://drive.google.com/file/d/1Dv_RjEFOiQA1fwK1ahvhWnMW3Z_4erMK/view?usp=sharing" target="_blank" class="btn-social">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View Certificate
-                    </a>
-                </div>
-            </div>
-
-            <div class="card">
-                <i class="fa-solid fa-certificate cert-icon"></i>
-                <h3>Ruang Guru Certification</h3>
-                <p>An official certification validating achievements, technical skills, and dedication in the technology field.</p>
-                
-                <div style="margin-top: 25px; transform: translateZ(20px);">
-                    <a href="https://drive.google.com/file/d/179zxv3gzpcUGfLKBfmZVsOaKyb_7QNOz/view?usp=sharing" target="_blank" class="btn-social">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View Certificate
-                    </a>
-                </div>
-            </div>
-            
-        </div>
-    </section>
-
-    <section id="tools" class="hidden">
-        <div class="tools-header">
-            <h2>Tools <span style="color:#00ffcc;">Collection</span></h2>
-            <p>Quick access to all productivity tools.</p>
-            <div class="search-wrapper">
-                <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                <input type="text" class="search-input" id="searchInput" placeholder="Search tools (Github, VSCode, etc)..." autocomplete="off">
-            </div>
-        </div>
-
-        <div class="tools-grid-container">
-            <a href="https://maszae-bit.github.io/Login-Zae-Group/" class="tool-card" data-name="vscode coding database">
-                <i class="fa-solid fa-database"></i>
-                <span>Database</span>
-            </a>
-            <a href="https://github.com/MasZae-BIT" class="tool-card" data-name="github repo code">
-                <i class="fa-brands fa-github"></i>
-                <span>Github</span>
-            </a>
-            <a href="https://drive.google.com/drive/u/1/folders/1rC5fnbguTs4TBfGauJ9_8HD-0uiyKKWg" class="tool-card" data-name="Knowledge Hub drive">
-                <i class="fa-solid fa-flask"></i>
-                <span>Knowledge Hub</span>
-            </a>
-            <a href="https://maszae-bit.github.io/ZaeAI/" class="tool-card" data-name="chatgpt ai bot">
-                <i class="fa-solid fa-microchip"></i>
-                <span>Zae AI</span>
-            </a>
-            <a href="https://grammar-checker-ashen.vercel.app/" class="tool-card" data-name="grammar checker english spell text">
-                <i class="fa-solid fa-spell-check"></i>
-                <span>Grammar Checker</span>
-            </a>
-            <a href="https://open.spotify.com/playlist/4T7MrNwyHzB3DwtzaIGFFn?si=ddabd6a078a64c0a" class="tool-card" data-name="spotify music song playlist">
-                <i class="fa-brands fa-spotify"></i>
-                <span>Spotify</span>
-            </a>
-            <a href="https://discord.gg/3JdWnYsV" class="tool-card" data-name="discord social chat">
+            <div class="icons">
                 <i class="fa-brands fa-discord"></i>
-                <span>Discord</span>
-            </a>
-            <a href="https://maszae-bit.github.io/Instagram-Downloader/" class="tool-card" data-name="Instagram social media">
-                <i class="fa-brands fa-instagram"></i>
-                <span>Instagram DL</span>
-            </a>
-            <a href="https://maszae-bit.github.io/Tiktok-Downloader/" class="tool-card" data-name="Tiktok video social">
-                <i class="fa-brands fa-tiktok"></i>
-                <span>Tiktok DL</span>
-            </a>
-            <a href="https://maszae-bit.github.io/Journal/" class="tool-card" data-name="database sql journal search">
-                <i class="fa-solid fa-book-journal-whills"></i>
-                <span>Journal Search</span>
-            </a>
-            <div id="no-result">No tools found.</div>
-        </div>
-    </section>
+                <i class="fa-solid fa-ellipsis-vertical" style="margin-left: 10px;"></i>
+            </div>
+        </header>
 
-    <section id="contact" class="hidden">
-        <h2>Let's <span style="color:#00ffcc;">Connect</span></h2>
-        <p style="margin-top: 20px; color: #ccc;">Feel free to reach out and network with me!</p>
-        
-        <img src="https://media.giphy.com/media/Wj7lNjMNDxSmc/giphy.gif" alt="Email Animation" class="floating-gif" style="width: 200px; margin-top: 40px; margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(0, 255, 204, 0.5));">
-        
-        <div class="social-wrapper">
-            <a href="https://www.linkedin.com/in/muhammad-irsya-zaelani" class="btn-social" target="_blank">
-                <i class="fa-brands fa-linkedin"></i> LinkedIn
+        <main class="landing-main">
+            <h1 class="fade-in-up delay-1">Project Zae</h1>
+            <p class="subtitle fade-in-up delay-2">Interactive worlds.<br>Generated in real-time.</p>
+
+            <div class="image-showcase fade-in-up delay-3">
+                <img src="https://picsum.photos/id/1080/400/400" alt="World Left" class="showcase-circle circle-left">
+                <img src="https://picsum.photos/id/1015/600/600" alt="World Center" class="showcase-circle circle-center">
+                <img src="https://picsum.photos/id/1025/400/400" alt="World Right" class="showcase-circle circle-right">
+            </div>
+
+            <button id="explore-btn" class="fade-in-up delay-4">Explore now</button>
+            
+            <a href="#" class="access-link fade-in-up delay-4">How do I get access?</a>
+        </main>
+
+        <footer class="landing-footer fade-in-up delay-4">
+            Explore <span>Zae AI Ultra</span>. See FAQ.
+        </footer>
+    </div>
+
+    <div id="main-portfolio">
+        <nav>
+            <h1><i class="fa-solid fa-flask" style="font-size: 1.2rem; margin-right: 5px;"></i> Zae Labs</h1>
+            
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+
+            <ul id="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#tools">Tools</a></li>
+                <li><a href="#access-section">Access</a></li>
+            </ul>
+        </nav>
+
+        <section id="home" class="hero">
+            <div class="hero-text">
+                <h2>Hello, I'm <span style="font-weight: 700;">Irsya Zaelani</span></h2>
+                <h3>Tech Enthusiast & Student at <span>IPB University</span></h3>
+                
+                <p id="typing-text"></p>
+                
+                <div class="social-wrapper" style="justify-content: flex-start;">
+                     <a href="#experience" class="btn-social">
+                        <i class="fa-solid fa-user-astronaut"></i> Get to Know Me
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-image-wrapper">
+                <img src="https://instagram.fcgk32-1.fna.fbcdn.net/v/t51.82787-15/659592455_18112837321689596_351421020188487837_n.webp?_nc_cat=101&ig_cache_key=Mzg2Nzk3NTUwNzI4Mzk3NzY4MA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTkyMC5zZHIuQzMifQ%3D%3D&_nc_ohc=tF_fdwFdNuEQ7kNvwE_A047&_nc_oc=Ado09678_JFvuIAjICGSfJBpR_82cijS2WmOQtrA0XafdbHm6W7yVacTUX7IAmGuRBQ&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fcgk32-1.fna&_nc_gid=EY39F15DxzX6dlGEeAzPIQ&_nc_ss=7a32e&oh=00_Af3h_YUTEvLuIB8cyUKv6jdN_lDP5ilw_RAzebfBVTsH9A&oe=69E6AD76" alt="Irsya Zaelani" class="profile-photo">
+            </div>
+
+            <a href="#experience" class="scroll-down">
+                <i class="fa-solid fa-angles-down"></i>
             </a>
-            <a href="https://www.instagram.com/irsyazaelani/" class="btn-social" target="_blank">
-                <i class="fa-brands fa-instagram"></i> Instagram
-            </a>
-        </div>
-    </section>
+        </section>
+
+        <section id="experience" class="hidden">
+            <h2>My <span style="font-weight: 300;">Experience</span></h2>
+            <div class="projects-grid">
+                
+                <div class="card">
+                    <h3>LPK Tepi Sawah Volunteer</h3>
+                    <p class="date-loc">IPB University | Present</p>
+                    <p>Actively volunteering in the Computer Science community, focusing on teaching basic things to children through play and participating in direct field activities.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Head of Robotic Club</h3>
+                    <p class="date-loc">SMAN 28 Kab. Tangerang | Jun 2023 - Aug 2024</p>
+                    <p>Led the high school robotics club and successfully engineered a Line Follower Robot. Fostered leadership, teamwork, and strong hardware-software integration skills.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Member of Dastha Research Team</h3>
+                    <p class="date-loc">SMAN 28 Kab. Tangerang | Jun 2023 - Jul 2024</p>
+                    <p>Actively contributed to the research team. Applied strong analytical and teamwork skills to conduct studies, gather data, and develop innovative solutions.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="certifications" class="hidden">
+            <h2>My <span style="font-weight: 300;">Certifications</span></h2>
+            <div class="projects-grid">
+                
+                <div class="card">
+                    <i class="fa-brands fa-google cert-icon"></i>
+                    <h3>Google Certification</h3>
+                    <p>An official certification from Google demonstrating industry-standard technical competence and expertise.</p>
+                    
+                    <div style="margin-top: 25px; transform: translateZ(20px);">
+                        <a href="https://edu.google.accredible.com/5463895f-480a-4157-96ab-885dcaeda295#acc.k3KbATth" target="_blank" class="btn-social">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> View Certificate
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <i class="fa-solid fa-award cert-icon"></i>
+                    <h3>IBM Certification</h3>
+                    <p>An official certification from IBM validating advanced technical skills, data analysis, and problem-solving abilities.</p>
+                    
+                    <div style="margin-top: 25px; transform: translateZ(20px);">
+                        <a href="https://drive.google.com/file/d/1Dv_RjEFOiQA1fwK1ahvhWnMW3Z_4erMK/view?usp=sharing" target="_blank" class="btn-social">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> View Certificate
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <i class="fa-solid fa-certificate cert-icon"></i>
+                    <h3>Ruang Guru Certification</h3>
+                    <p>An official certification validating achievements, technical skills, and dedication in the technology field.</p>
+                    
+                    <div style="margin-top: 25px; transform: translateZ(20px);">
+                        <a href="https://drive.google.com/file/d/179zxv3gzpcUGfLKBfmZVsOaKyb_7QNOz/view?usp=sharing" target="_blank" class="btn-social">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> View Certificate
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <section id="tools" class="hidden">
+            <div class="tools-header">
+                <h2>Tools <span style="font-weight: 300;">Collection</span></h2>
+                <p>Quick access to all productivity tools.</p>
+                <div class="search-wrapper">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search tools (Github, VSCode, etc)..." autocomplete="off">
+                </div>
+            </div>
+
+            <div class="tools-grid-container">
+                <a href="https://maszae-bit.github.io/Login-Zae-Group/" class="tool-card" data-name="vscode coding database">
+                    <i class="fa-solid fa-database"></i>
+                    <span>Database</span>
+                </a>
+                <a href="https://github.com/MasZae-BIT" class="tool-card" data-name="github repo code">
+                    <i class="fa-brands fa-github"></i>
+                    <span>Github</span>
+                </a>
+                <a href="https://drive.google.com/drive/u/1/folders/1rC5fnbguTs4TBfGauJ9_8HD-0uiyKKWg" class="tool-card" data-name="Knowledge Hub drive">
+                    <i class="fa-solid fa-flask"></i>
+                    <span>Knowledge Hub</span>
+                </a>
+                <a href="https://maszae-bit.github.io/ZaeAI/" class="tool-card" data-name="chatgpt ai bot">
+                    <i class="fa-solid fa-microchip"></i>
+                    <span>Zae AI</span>
+                </a>
+                <a href="https://grammar-checker-ashen.vercel.app/" class="tool-card" data-name="grammar checker english spell text">
+                    <i class="fa-solid fa-spell-check"></i>
+                    <span>Grammar Checker</span>
+                </a>
+                <a href="https://open.spotify.com/playlist/4T7MrNwyHzB3DwtzaIGFFn?si=ddabd6a078a64c0a" class="tool-card" data-name="spotify music song playlist">
+                    <i class="fa-brands fa-spotify"></i>
+                    <span>Spotify</span>
+                </a>
+                <a href="https://discord.gg/3JdWnYsV" class="tool-card" data-name="discord social chat">
+                    <i class="fa-brands fa-discord"></i>
+                    <span>Discord</span>
+                </a>
+                <a href="https://maszae-bit.github.io/Instagram-Downloader/" class="tool-card" data-name="Instagram social media">
+                    <i class="fa-brands fa-instagram"></i>
+                    <span>Instagram DL</span>
+                </a>
+                <a href="https://maszae-bit.github.io/Tiktok-Downloader/" class="tool-card" data-name="Tiktok video social">
+                    <i class="fa-brands fa-tiktok"></i>
+                    <span>Tiktok DL</span>
+                </a>
+                <a href="https://maszae-bit.github.io/Journal/" class="tool-card" data-name="database sql journal search">
+                    <i class="fa-solid fa-book-journal-whills"></i>
+                    <span>Journal Search</span>
+                </a>
+                <div id="no-result">No tools found.</div>
+            </div>
+        </section>
+
+        <section id="access-section" class="hidden">
+            <div class="access-top-links">
+                <a href="#">labs.zae</a>
+                <a href="#">Instagram</a>
+            </div>
+            
+            <h2 class="access-title">Access</h2>
+            
+            <div class="access-buttons">
+                <a href="#" class="btn-outline-wide">Explore Zae AI Ultra</a>
+                <a href="#" class="btn-outline-wide">Learn more about Zae</a>
+            </div>
+            
+            <a href="#" class="access-bottom-link">Already have access? Go to Project Zae</a>
+        </section>
+
+        <footer class="zae-footer">
+            <div class="footer-inner">
+                <div class="footer-top">
+                    <p class="footer-tagline">Stay connected for early access to our newest tools and local events</p>
+                    <div class="newsletter-row">
+                        <button class="circle-btn"><i class="fa-solid fa-circle" style="font-size: 8px;"></i></button>
+                        <button class="circle-btn"><i class="fa-solid fa-won-sign"></i></button>
+                        <button class="circle-btn"><i class="fa-brands fa-x-twitter"></i></button>
+                        <button class="btn-solid-pill">Sign up for our newsletter</button>
+                    </div>
+                </div>
+                
+                <div class="footer-columns">
+                    <div class="footer-col">
+                        <h4>NAVIGATION</h4>
+                        <ul>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Experiments</a></li>
+                            <li><a href="#">Sessions</a></li>
+                            <li><a href="#">Community</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>OTHER TEAMS AND PRODUCT AREAS</h4>
+                        <ul>
+                            <li><a href="#">Zae AI</a></li>
+                            <li><a href="#">Zae Cloud</a></li>
+                            <li><a href="#">Zae Research</a></li>
+                            <li><a href="#">Zae DeepMind</a></li>
+                            <li><a href="#">Search Labs</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
 
     <script>
+        // ==========================================
+        // LOGIKA MURNI GESER HALAMAN (NATIVE SCROLL)
+        // ==========================================
+        const exploreBtn = document.getElementById('explore-btn');
+        let typewriterStarted = false;
+
+        exploreBtn.addEventListener('click', () => {
+            // 1. Membuka kunci scroll halaman utama
+            document.body.style.overflowY = 'auto';
+            document.body.style.overflowX = 'hidden';
+            
+            // 2. Scroll mulus (menggeser halaman) secara natural ke bagian portofolio
+            document.getElementById('main-portfolio').scrollIntoView({ behavior: 'smooth' });
+
+            // 3. Mulai efek ngetik setelah halaman sedang bergeser ke bawah
+            if(!typewriterStarted) {
+                setTimeout(typeWriter, 600); // Tunggu sebentar sampai halaman cukup bergeser
+                typewriterStarted = true;
+            }
+        });
+
+        // ==========================================
+        // LOGIKA PORTFOLIO ASLI
+        // ==========================================
         const text = "Hi there! I'm a tech enthusiast currently focused on learning how to turn simple ideas into code. Still a work in progress, but always excited to learn and try new things.";
-        
         let index = 0;
+        
         function typeWriter() {
             if (index < text.length) {
                 document.getElementById("typing-text").innerHTML += text.charAt(index);
                 index++;
-                setTimeout(typeWriter, 30); // Kecepatan diatur jadi lebih sat-set!
+                setTimeout(typeWriter, 30); 
             }
         }
-        
-        // Pemicu ngetik langsung jalan setelah HTML dimuat, nggak nunggu gambar selesai loading
-        document.addEventListener('DOMContentLoaded', typeWriter);
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
@@ -591,15 +988,16 @@
                     entry.target.classList.add('show');
                 }
             });
-        });
+        }, { threshold: 0.1 });
+        
         const hiddenElements = document.querySelectorAll('.hidden');
         hiddenElements.forEach((el) => observer.observe(el));
 
-        // Custom Cursor Logic
+        // Custom Cursor Logic (Hanya jalan di Desktop)
         const cursor = document.getElementById('cursor');
-        const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+        const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.matchMedia("(pointer: coarse)").matches);
 
-        if (!isTouchDevice) {
+        if (!isTouchDevice && cursor) {
             document.addEventListener('mousemove', (e) => {
                 requestAnimationFrame(() => {
                     cursor.style.left = e.clientX + 'px';
@@ -607,7 +1005,7 @@
                 });
             });
 
-            const interactiveElements = document.querySelectorAll('a, input, .tool-card, .card, .menu-toggle');
+            const interactiveElements = document.querySelectorAll('a, button, input, .tool-card, .card, .menu-toggle, .circle-btn, .btn-outline-wide, .btn-solid-pill');
             interactiveElements.forEach(el => {
                 el.addEventListener('mouseenter', () => cursor.classList.add('active'));
                 el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
@@ -636,9 +1034,9 @@
             noResult.style.display = found ? 'none' : 'block';
         });
 
-        // 3D HOVER EFFECT (WEB3)
+        // 3D HOVER EFFECT (Hanya Desktop)
         const cards = document.querySelectorAll('.card, .tool-card'); 
-        if (window.innerWidth > 768) {
+        if (window.innerWidth > 768 && !isTouchDevice) {
             cards.forEach(card => {
                 card.addEventListener('mousemove', e => {
                     const rect = card.getBoundingClientRect();
@@ -646,9 +1044,9 @@
                     const y = e.clientY - rect.top;
                     const centerX = rect.width / 2;
                     const centerY = rect.height / 2;
-                    const rotateX = ((y - centerY) / centerY) * -15; 
-                    const rotateY = ((x - centerX) / centerX) * 15;
-                    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05) translateZ(10px)`;
+                    const rotateX = ((y - centerY) / centerY) * -10; 
+                    const rotateY = ((x - centerX) / centerX) * 10;
+                    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02) translateZ(10px)`;
                 });
                 card.addEventListener('mouseleave', () => {
                     card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1) translateZ(0)';
