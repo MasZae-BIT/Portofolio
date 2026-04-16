@@ -76,11 +76,11 @@
            ========================================= */
         #zae-landing {
             width: 100%;
-            height: 100vh; /* Mengambil layar penuh */
+            height: 100vh;
             background-color: #000;
             display: flex;
             flex-direction: column;
-            position: relative; /* Dibuat relative agar bisa discroll secara natural */
+            position: relative;
             z-index: 2;
         }
 
@@ -276,7 +276,6 @@
             letter-spacing: -0.5px;
         }
         
-        /* Hamburger Menu Icon */
         .menu-toggle {
             display: none;
             font-size: 1.5rem;
@@ -300,7 +299,6 @@
         }
         nav ul li a:hover { color: var(--text-main); }
 
-        /* General Section */
         section {
             min-height: 100vh;
             padding: 130px 50px 50px 50px;
@@ -348,7 +346,6 @@
 
         .hero-image-wrapper { flex: 1; display: flex; justify-content: center; align-items: center; position: relative;}
 
-        /* FOTO PROFIL PERSEGI MODERN */
         .profile-photo {
             max-width: 380px; width: 100%; height: auto; 
             aspect-ratio: 1/1; 
@@ -390,6 +387,7 @@
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             transform-style: preserve-3d; 
             display: flex; flex-direction: column;
+            position: relative; /* Penting untuk accordion */
         }
         .card:hover {
             border-color: rgba(255, 255, 255, 0.3);
@@ -412,6 +410,72 @@
 
         .hidden { opacity: 0; transform: translateY(40px) scale(0.95); transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1); }
         .show { opacity: 1; transform: translateY(0) scale(1); }
+
+        /* =========================================
+           ACCORDION DROPDOWN (ANTI-OVERLAP)
+           ========================================= */
+        .dropdown-container {
+            width: 100%;
+            margin-top: 25px;
+            transform: translateZ(20px);
+        }
+        
+        .dropdown-btn {
+            width: 100%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            cursor: pointer;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .dropdown-btn:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.4);
+        }
+        
+        .cert-dropdown {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            overflow: hidden;
+            max-height: 0; /* Tertutup secara default */
+            opacity: 0;
+            transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
+        }
+        
+        .cert-dropdown.active {
+            max-height: 300px; /* Cukup besar untuk menampilkan opsi */
+            opacity: 1;
+            margin-top: 15px; /* Memberi jarak saat terbuka */
+        }
+        
+        .cert-dropdown a {
+            color: #bbb;
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.2s ease;
+        }
+        .cert-dropdown a:hover {
+            background: #fff;
+            color: #000;
+            transform: translateX(4px);
+            border-color: #fff;
+        }
 
         /* =========================================
            TOOLS COLLECTION 
@@ -460,7 +524,7 @@
         .tool-card:hover i { transform: scale(1.15) translateZ(40px); }
         #no-result { display: none; grid-column: 1 / -1; text-align: center; color: var(--text-muted); margin-top: 20px; font-style: italic;}
 
-        /* BUTTON SOCIAL STYLE (Masih digunakan di Hero) */
+        /* BUTTON SOCIAL STYLE (Untuk Hero) */
         .btn-social {
             display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; 
             background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.2); color: #fff; 
@@ -473,7 +537,7 @@
         }
 
         /* =========================================
-           ACCESS SECTION (REFINED & SMALLER SIZES)
+           ACCESS SECTION (REFINED)
            ========================================= */
         #access-section {
             min-height: auto;
@@ -510,17 +574,17 @@
             flex-direction: column;
             gap: 12px;
             width: 100%;
-            max-width: 320px; /* Lebar tombol diperkecil */
+            max-width: 320px; 
             margin: 0 auto;
         }
         .btn-outline-wide {
             display: block;
-            padding: 12px 20px; /* Padding lebih tipis */
-            border: 1px solid rgba(255, 255, 255, 0.2); /* Garis outline lebih tipis/redup */
+            padding: 12px 20px; 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
             border-radius: 40px;
             color: #fff;
             text-decoration: none;
-            font-size: 0.85rem; /* Font lebih kecil proporsional */
+            font-size: 0.85rem; 
             font-weight: 500;
             transition: all 0.3s ease;
         }
@@ -541,11 +605,11 @@
         .access-bottom-link:hover { color: #fff; }
 
         /* =========================================
-           FOOTER SECTION (REFINED & SMALLER SIZES)
+           FOOTER SECTION 
            ========================================= */
         .zae-footer {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 50px 50px 80px; /* Padding disesuaikan */
+            padding: 50px 50px 80px; 
             background: #000;
             text-align: left;
             width: 100%;
@@ -555,7 +619,7 @@
             margin: 0 auto;
         }
         .footer-tagline {
-            font-size: 0.95rem; /* Teks lebih halus */
+            font-size: 0.95rem; 
             font-weight: 400;
             line-height: 1.5;
             max-width: 400px;
@@ -564,13 +628,13 @@
         }
         .newsletter-row {
             display: flex;
-            gap: 12px; /* Jarak antar tombol diperkecil */
+            gap: 12px; 
             align-items: center;
             margin-bottom: 50px;
             flex-wrap: wrap;
         }
         .circle-btn {
-            width: 42px; /* Bulatan diperkecil */
+            width: 42px; 
             height: 42px;
             border-radius: 50%;
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -591,7 +655,7 @@
             background: #fff;
             color: #000;
             padding: 0 20px;
-            height: 42px; /* Disesuaikan tinggi bulatan */
+            height: 42px; 
             border-radius: 30px;
             border: none;
             font-size: 0.85rem;
@@ -610,7 +674,7 @@
             gap: 30px;
         }
         .footer-col h4 {
-            font-size: 0.7rem; /* Heading super mungil & sleek */
+            font-size: 0.7rem; 
             letter-spacing: 1.5px;
             color: #666;
             margin-bottom: 20px;
@@ -621,12 +685,12 @@
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 15px; /* Jarak list dipersempit */
+            gap: 15px; 
         }
         .footer-col ul li a {
             color: #aaa;
             text-decoration: none;
-            font-size: 0.85rem; /* Ukuran text minimalis */
+            font-size: 0.85rem; 
             font-weight: 400;
             transition: color 0.3s;
         }
@@ -669,8 +733,9 @@
             
             .profile-photo { width: 80%; max-width: 280px; }
 
+            /* Menghilangkan hover paksa di mobile agar accordion stabil */
             .card, .tool-card { width: 100%; transform: none !important; perspective: none !important; transition: transform 0.3s ease !important; }
-            .card:hover, .tool-card:hover { transform: translateY(-4px) !important; }
+            .card:hover, .tool-card:hover { transform: translateY(0px) !important; }
 
             .tools-grid-container { grid-template-columns: repeat(2, 1fr); gap: 12px; perspective: none;}
             .tool-card { height: 130px; }
@@ -773,11 +838,17 @@
         <section id="experience" class="hidden">
             <h2>My <span style="font-weight: 300;">Experience</span></h2>
             <div class="projects-grid">
-                
+
                 <div class="card">
                     <h3>LPK Tepi Sawah Volunteer</h3>
                     <p class="date-loc">IPB University | Present</p>
                     <p>Actively volunteering in the Computer Science community, focusing on teaching basic things to children through play and participating in direct field activities.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>IPB Archery</h3>
+                    <p class="date-loc">IPB University | Present</p>
+                    <p>Active as a member of the IPB Archery community, focusing on mastering basic archery techniques through regular practice and actively participating in community activities in the field.</p>
                 </div>
 
                 <div class="card">
@@ -802,36 +873,56 @@
                 <div class="card">
                     <i class="fa-brands fa-google cert-icon"></i>
                     <h3>Google Certification</h3>
-                    <p>An official certification from Google demonstrating industry-standard technical competence and expertise.</p>
+                    <p>Official certifications from Google demonstrating industry-standard technical competence and expertise.</p>
                     
-                    <div style="margin-top: 25px; transform: translateZ(20px);">
-                        <a href="https://edu.google.accredible.com/5463895f-480a-4157-96ab-885dcaeda295#acc.k3KbATth" target="_blank" class="btn-social">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i> View Certificate
-                        </a>
+                    <div class="dropdown-container">
+                        <button class="dropdown-btn">
+                            <span><i class="fa-solid fa-layer-group" style="margin-right: 8px;"></i> View Certificates</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        
+                        <div class="cert-dropdown">
+                            <a href="https://edu.google.accredible.com/5463895f-480a-4157-96ab-885dcaeda295" target="_blank"><i class="fa-solid fa-certificate"></i> Gemini Certified Educator</a>
+                            <a href="https://www.dicoding.com/certificates/53XEKKEYVXRN" target="_blank"><i class="fa-solid fa-certificate"></i> AI basics</a>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="card">
                     <i class="fa-solid fa-award cert-icon"></i>
                     <h3>IBM Certification</h3>
-                    <p>An official certification from IBM validating advanced technical skills, data analysis, and problem-solving abilities.</p>
+                    <p>Official certifications from IBM SkillsBuild validating advanced technical skills and problem-solving abilities.</p>
                     
-                    <div style="margin-top: 25px; transform: translateZ(20px);">
-                        <a href="https://drive.google.com/file/d/1Dv_RjEFOiQA1fwK1ahvhWnMW3Z_4erMK/view?usp=sharing" target="_blank" class="btn-social">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i> View Certificate
-                        </a>
+                    <div class="dropdown-container">
+                        <button class="dropdown-btn">
+                            <span><i class="fa-solid fa-layer-group" style="margin-right: 8px;"></i> View Certificates</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        
+                        <div class="cert-dropdown">
+                            <a href="https://drive.google.com/file/d/1Dv_RjEFOiQA1fwK1ahvhWnMW3Z_4erMK/view" target="_blank"><i class="fa-solid fa-certificate"></i> IBM Granite Certified</a>
+                            <a href="https://skills.yourlearning.ibm.com/certificate/share/e07590991dewogICJvYmplY3RJZCIgOiAiTURMLTUwNCIsCiAgIm9iamVjdFR5cGUiIDogIkFDVElWSVRZIiwKICAibGVhcm5lckNOVU0iIDogIjU4MjQ4NDdSRUciCn034e5a94fee-10" target="_blank"><i class="fa-solid fa-certificate"></i> Use Generative AI</a>
+                            <a href="https://skills.yourlearning.ibm.com/certificate/share/2c385c2b05ewogICJvYmplY3RUeXBlIiA6ICJBQ1RJVklUWSIsCiAgIm9iamVjdElkIiA6ICJNREwtNTY3IiwKICAibGVhcm5lckNOVU0iIDogIjU4MjQ4NDdSRUciCn0853fb8f20d-10" target="_blank"><i class="fa-solid fa-certificate"></i> Software Development</a>
+                            <a href="https://skills.yourlearning.ibm.com/certificate/share/b08c8c0376ewogICJvYmplY3RJZCIgOiAiTURMLTU2NiIsCiAgIm9iamVjdFR5cGUiIDogIkFDVElWSVRZIiwKICAibGVhcm5lckNOVU0iIDogIjU4MjQ4NDdSRUciCn018aaaf58d0-10" target="_blank"><i class="fa-solid fa-certificate"></i> Code Generation & Optimization</a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="card">
                     <i class="fa-solid fa-certificate cert-icon"></i>
                     <h3>Ruang Guru Certification</h3>
-                    <p>An official certification validating achievements, technical skills, and dedication in the technology field.</p>
+                    <p>Official certifications validating achievements, technical skills, and dedication in the technology field.</p>
                     
-                    <div style="margin-top: 25px; transform: translateZ(20px);">
-                        <a href="https://drive.google.com/file/d/179zxv3gzpcUGfLKBfmZVsOaKyb_7QNOz/view?usp=sharing" target="_blank" class="btn-social">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i> View Certificate
-                        </a>
+                    <div class="dropdown-container">
+                        <button class="dropdown-btn">
+                            <span><i class="fa-solid fa-layer-group" style="margin-right: 8px;"></i> View Certificates</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        
+                        <div class="cert-dropdown">
+                            <a href="https://drive.google.com/file/d/179zxv3gzpcUGfLKBfmZVsOaKyb_7QNOz/view" target="_blank"><i class="fa-solid fa-certificate"></i> National Teacher Training</a>
+                            <a href="https://drive.google.com/file/d/1Zpok9g5uSva0wBmO2ZazaHaxNEwQjVQV/view" target="_blank"><i class="fa-solid fa-certificate"></i> Science Competition </a>
+                        </div>
                     </div>
                 </div>
                 
@@ -1005,7 +1096,7 @@
                 });
             });
 
-            const interactiveElements = document.querySelectorAll('a, button, input, .tool-card, .card, .menu-toggle, .circle-btn, .btn-outline-wide, .btn-solid-pill');
+            const interactiveElements = document.querySelectorAll('a, button, input, .tool-card, .card, .menu-toggle, .circle-btn, .btn-outline-wide, .btn-solid-pill, .dropdown-btn');
             interactiveElements.forEach(el => {
                 el.addEventListener('mouseenter', () => cursor.classList.add('active'));
                 el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
@@ -1032,6 +1123,46 @@
             });
 
             noResult.style.display = found ? 'none' : 'block';
+        });
+
+        // ==========================================
+        // ACCORDION DROPDOWN LOGIC (ANTI-OVERLAP)
+        // ==========================================
+        const dropdownBtns = document.querySelectorAll('.dropdown-btn');
+        
+        dropdownBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const dropdown = btn.nextElementSibling;
+                const icon = btn.querySelector('.fa-chevron-down, .fa-chevron-up');
+                
+                // Menutup dropdown lain yang sedang terbuka
+                document.querySelectorAll('.cert-dropdown').forEach(dd => {
+                    if (dd !== dropdown && dd.classList.contains('active')) {
+                        dd.classList.remove('active');
+                        // Reset icon dropdown lain
+                        const otherIcon = dd.previousElementSibling.querySelector('.fa-chevron-up');
+                        if (otherIcon) {
+                            otherIcon.classList.remove('fa-chevron-up');
+                            otherIcon.classList.add('fa-chevron-down');
+                        }
+                    }
+                });
+
+                // Toggle dropdown yang diklik
+                dropdown.classList.toggle('active');
+                
+                // Animasi ikon panah
+                if (icon) {
+                    if (dropdown.classList.contains('active')) {
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    } else {
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                }
+            });
         });
 
         // 3D HOVER EFFECT (Hanya Desktop)
